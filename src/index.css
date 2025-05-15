@@ -1,0 +1,76 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 13% 18%;
+    --foreground: 0 0% 98%;
+
+    --card: 224 71% 4%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 13% 18%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 84% 49%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 215 27% 17%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 218 11% 65%;
+
+    --accent: 215 27% 17%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 215 27% 17%;
+    --input: 215 27% 17%;
+    --ring: 0 84% 49%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 220 13% 10%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 84% 49%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 215 27% 17%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 0 84% 49%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .netflix-card {
+    @apply relative overflow-hidden rounded-md transition-all duration-300 hover:animate-scale-up;
+  }
+
+  .netflix-button {
+    @apply bg-netflix text-white hover:bg-netflix-hover transition-colors duration-200 font-medium py-2 px-4 rounded;
+  }
+
+  .netflix-play-button {
+    @apply flex items-center gap-2 bg-white text-black hover:bg-opacity-90 transition-colors duration-200 font-medium py-2 px-4 rounded;
+  }
+
+  .netflix-secondary-button {
+    @apply bg-zinc-700 text-white hover:bg-zinc-600 transition-colors duration-200 font-medium py-2 px-4 rounded;
+  }
+}
+ 
