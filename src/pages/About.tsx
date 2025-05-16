@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar"; // Ensure this path is correct
 import Footer from "../components/Footer"; // Ensure this path is correct
 import { Link } from "react-router-dom"; // For internal links if any
-import { Github, Linkedin, Mail, Briefcase, ExternalLink } from "lucide-react"; // Added icons
+import { Github, Linkedin, Mail, Briefcase, ExternalLink, CheckCircle, Zap, Target, BrainCircuit, Lightbulb, Code2 } from "lucide-react"; // Added more icons
 
 const About = () => {
   const portfolioUrl = "https://engiportfolio.netlify.app/"; // Your portfolio link
@@ -24,7 +24,7 @@ const About = () => {
           <div className="md:col-span-1 space-y-6">
             <div className="aspect-[4/5] rounded-lg overflow-hidden shadow-xl">
               <img
-                src="public\images\profile.jpg" // Replace with your actual photo URL
+                src="/images/profile.jpg" // Replace with your actual photo URL
                 alt="Mohit 'Enji' Negi"
                 className="w-full h-full object-cover"
               />
@@ -93,19 +93,50 @@ const About = () => {
           {/* Right Column: My Story and My Approach */}
           <div className="md:col-span-2 space-y-8">
             <div className="bg-secondary rounded-lg p-5 sm:p-8 shadow-lg">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">My Story</h2>
-              <p className="text-gray-300 mb-4 leading-relaxed">
-                Hello! I'm Mohit 'Enji' Negi, a passionate technologist and creator with a journey that has taken me from Mechanical Engineering (Vellore Institute of Technology) and Investment Sales to the dynamic worlds of QA Software Engineering and, most recently, AI-driven development. My Master's in Information Systems from Northeastern University further solidified my foundation to tackle complex tech challenges.
-              </p>
-              <p className="text-gray-300 mb-4 leading-relaxed">
-                At Dassault Systèmes, as a QA Software Engineer, I spearheaded the deployment of numerous automation scripts (Python, TypeScript, Shell) within CI/CD pipelines, significantly reducing testing times and enhancing product lifecycle efficiency. I developed POCs, automated regression tests with Selenium, built ETL pipelines for QA data, and created script monitoring dashboards, always striving for impactful improvements—like reducing user creation time by 67%.
-              </p>
-              <p className="text-gray-300 mb-4 leading-relaxed">
-                My analytical skills were also honed at Huf Group, where as an Investment Sales Analyst, I contributed to securing multi-million dollar contracts by leveraging data analysis and market research to inform strategy.
-              </p>
-              <p className="text-gray-300 leading-relaxed">
-                Currently, my focus is on "AI Tech Creations." I'm the creator of <a href={fujmUrl} target="_blank" rel="noopener noreferrer" className="text-netflix hover:underline">FUJM.org</a>, a GenAI-powered job platform built on the MERN stack and leveraging Groq AI for intelligent profile analysis. My explorations in AI also include Chrome extensions like the <a href={aiScreenReaderUrl} target="_blank" rel="noopener noreferrer" className="text-netflix hover:underline">AI Screen Reader</a>, prompt-based browsing automation, and a universal web scraper. Another project I'm proud of is <a href={wallOfShadeUrl} target="_blank" rel="noopener noreferrer" className="text-netflix hover:underline">WallofShade</a>, a social accountability platform. This portfolio, presented Netflix-style, is a glimpse into my creative and technical capabilities.
-              </p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">My Story so far..</h2>
+              <ul className="space-y-4 text-gray-300 leading-relaxed list-none"> {/* Changed to list-none, using icons instead */}
+                <li className="flex items-start">
+                  <Lightbulb size={20} className="text-netflix mr-3 mt-1 flex-shrink-0" />
+                  <span>
+                    Who am i??? I am glad u asked, am a builder, learner, memer and a 24*7 dreamer. I transitioned from Mechanical Engineering (VIT) and Investment Sales to QA Software Engineering and AI-driven development, with an M.Sc. in Information Systems (Northeastern University) strengthening my tech foundation.
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <Zap size={20} className="text-netflix mr-3 mt-1 flex-shrink-0" />
+                  <span>
+                    At Dassault Systèmes (QA Software Engineer):
+                    <ul className="list-disc list-inside pl-5 mt-2 space-y-1">
+                        <li>Spearheaded deployment of 7+ automation scripts (Python, TypeScript, Shell) in CI/CD, enhancing product lifecycle efficiency.</li>
+                        <li>Developed POCs, automated regression tests with Selenium (30% time reduction), built ETL pipelines, and created script monitoring dashboards.</li>
+                        <li>Achieved a 67% reduction in user creation time via Python Selenium automations.</li>
+                    </ul>
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <Target size={20} className="text-netflix mr-3 mt-1 flex-shrink-0" />
+                  <span>
+                    At Huf Group (Investment Sales Analyst): Contributed to securing multi-million dollar contracts by leveraging data analysis and market research.
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <BrainCircuit size={20} className="text-netflix mr-3 mt-1 flex-shrink-0" />
+                  <span>
+                    Current Focus - AI Tech Creations:
+                    <ul className="list-disc list-inside pl-5 mt-2 space-y-1">
+                        <li>Creator of <a href={fujmUrl} target="_blank" rel="noopener noreferrer" className="text-netflix hover:underline">FUJM.org</a>, a GenAI job platform (MERN stack, Groq AI).</li>
+                        <li>Developed Chrome extensions like the <a href={aiScreenReaderUrl} target="_blank" rel="noopener noreferrer" className="text-netflix hover:underline">AI Screen Reader</a> (GPT-powered).</li>
+                        <li>Explored prompt-based browsing automation and built a universal web scraper.</li>
+                        <li>Launched <a href={wallOfShadeUrl} target="_blank" rel="noopener noreferrer" className="text-netflix hover:underline">WallofShade</a>, a social accountability platform.</li>
+                    </ul>
+                  </span>
+                </li>
+                 <li className="flex items-start">
+                  <Code2 size={20} className="text-netflix mr-3 mt-1 flex-shrink-0" />
+                  <span>
+                    This Netflix-style portfolio showcases my creative and technical capabilities.
+                  </span>
+                </li>
+              </ul>
             </div>
 
             <div className="bg-secondary rounded-lg p-5 sm:p-8 shadow-lg">
