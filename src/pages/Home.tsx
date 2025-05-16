@@ -13,7 +13,7 @@ const Home = () => {
       <Hero 
         title="Creator Enji"
         description="Dive into my professional journey through this Netflix-style meme portfolio experience. Browse through episodes showcasing my education, experience, projects, and skills."
-        imageUrl="/public/images/main_background.png"
+        imageUrl="/public/images/mainbackground.png"
       />
       
       <div className="px-6 py-12 max-w-screen-xl mx-auto">
