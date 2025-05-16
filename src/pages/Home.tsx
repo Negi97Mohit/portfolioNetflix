@@ -31,9 +31,8 @@ const Home = () => {
         <div className="bg-secondary rounded-lg p-6 my-12">
           <h2 className="text-2xl font-bold text-white mb-4">About Creator Enji</h2>
           <p className="text-gray-300 mb-6">
-            I'm a passionate web developer with expertise in creating immersive digital experiences. 
-            Through the episodes of my portfolio, you'll discover my journey, skills, and achievements 
-            in the world of web development.
+            Through these episodes of my portfolio, you'll get a peek into my journey, skills, and achievements 
+            and who am I as an engineer.
           </p>
           <div className="flex justify-center">
             <a href="#" className="netflix-button">
