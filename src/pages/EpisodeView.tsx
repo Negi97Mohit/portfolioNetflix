@@ -119,50 +119,69 @@ const EpisodeView = () => {
             />
           </div>
 
-          {/* Information Section (Right Panel) */}
-          <div className="w-full md:w-1/3 h-1/2 md:h-full bg-zinc-900 overflow-y-auto">
-            <div className="p-4 pt-6 md:p-6">
-              <img
-                src={episode.thumbnail}
-                alt={episode.title}
-                className="w-full h-auto max-h-48 object-cover rounded-md mb-4"
-                onError={(e) => {
-                  // Fallback for broken image links
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null; // Prevent infinite loop if placeholder also fails
-                  target.src = 'https://placehold.co/600x400/222/fff?text=Thumbnail+Not+Found';
-                }}
-              />
-              <h2 className="text-xl lg:text-2xl font-bold text-white mb-1">{episode.title}</h2>
-              <p className="text-gray-400 text-xs lg:text-sm mb-3">{episode.duration} • Portfolio Episode</p>
-              <p className="text-gray-300 mb-4 text-sm lg:text-base leading-relaxed">{episode.description}</p>
+          {/* Information Section (Right Panel) with Netflix Glass Effect */}
+          <div className="w-full md:w-1/3 h-1/2 md:h-full relative overflow-hidden bg-black border-t md:border-t-0 md:border-l border-white/10 shadow-2xl">
+            {/* Background Blur Image */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-[60px] opacity-40 scale-125" 
+              style={{ backgroundImage: `url(${episode.thumbnail})` }} 
+            />
+            
+            {/* Glass Content Container */}
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-2xl overflow-y-auto">
+              <div className="p-6 md:p-10 pb-20">
+                <div className="mb-6 relative rounded-xl overflow-hidden shadow-2xl border border-white/10 group">
+                  <img
+                    src={episode.thumbnail}
+                    alt={episode.title}
+                    className="w-full h-auto max-h-56 object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = 'https://placehold.co/600x400/222/fff?text=Thumbnail+Not+Found';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+                </div>
+                
+                <h2 className="text-2xl lg:text-3xl font-bold text-white mb-2 tracking-tight">{episode.title}</h2>
+                
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="text-green-400 font-medium text-sm">98% Match</span>
+                  <span className="text-gray-300 text-sm border border-gray-600 px-1.5 py-0.5 rounded-sm">{episode.duration}</span>
+                  <span className="text-gray-300 text-sm">HD</span>
+                </div>
+                
+                <p className="text-white text-base lg:text-lg leading-relaxed mb-8 font-medium">{episode.description}</p>
 
-              {episode.content.highlights && episode.content.highlights.length > 0 && (
-                <>
-                  <h3 className="text-white font-semibold mb-2 text-md lg:text-lg">Highlights:</h3>
-                  <ul className="list-disc list-inside text-gray-300 mb-4 space-y-1 text-sm lg:text-base">
-                    {episode.content.highlights.map((highlight, index) => (
-                      <li key={index}>{highlight}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
-
-              {episode.content.details && (
-                <>
-                  <h3 className="text-white font-semibold mb-2 text-md lg:text-lg">Details:</h3>
-                  <div>
-                    {/* CORRECTED RENDERING LOGIC FOR DETAILS */}
-                    {Array.isArray(episode.content.details)
-                      ? episode.content.details.map((detailItem, index) =>
-                          renderDetailParagraph(detailItem as DetailItem, index) // Explicitly call helper
-                        )
-                      : typeof episode.content.details === 'string'
-                      ? <p className="text-gray-300 text-sm lg:text-base leading-relaxed">{episode.content.details}</p>
-                      : null}
+                {episode.content.highlights && episode.content.highlights.length > 0 && (
+                  <div className="mb-8">
+                    <h3 className="text-gray-400 uppercase tracking-widest text-xs font-semibold mb-4 border-b border-white/10 pb-2">Highlights</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {episode.content.highlights.map((highlight, index) => (
+                        <span key={index} className="bg-white/10 hover:bg-white/20 transition-colors border border-white/5 text-gray-200 px-3 py-1.5 rounded-full text-xs lg:text-sm backdrop-blur-md">
+                          {highlight}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </>
-              )}
+                )}
+
+                {episode.content.details && (
+                  <div>
+                    <h3 className="text-gray-400 uppercase tracking-widest text-xs font-semibold mb-4 border-b border-white/10 pb-2">Details</h3>
+                    <div className="space-y-4">
+                      {Array.isArray(episode.content.details)
+                        ? episode.content.details.map((detailItem, index) =>
+                            renderDetailParagraph(detailItem as DetailItem, index)
+                          )
+                        : typeof episode.content.details === 'string'
+                        ? <p className="text-gray-300 text-sm lg:text-base leading-relaxed">{episode.content.details}</p>
+                        : null}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

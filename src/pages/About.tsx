@@ -11,27 +11,34 @@ const About = () => {
 
 
   return (
-    <div className="min-h-screen bg-background text-white">
+    <div className="min-h-screen bg-black text-white relative">
       <Navbar />
 
-      <div className="pt-24 md:pt-28 pb-12 px-4 sm:px-6 max-w-screen-xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl font-bold text-center text-white mb-10 md:mb-12">
+      {/* Decorative background gradients for glass effect */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-netflix/20 blur-[120px] rounded-full" />
+        <div className="absolute top-[20%] right-[-10%] w-[30%] h-[30%] bg-blue-600/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] left-[20%] w-[40%] h-[40%] bg-zinc-800/40 blur-[120px] rounded-full" />
+      </div>
+
+      <div className="pt-24 md:pt-32 pb-16 px-4 sm:px-6 max-w-screen-xl mx-auto relative z-10">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-center text-white mb-12 md:mb-16 tracking-tight">
           About Me
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
           {/* Left Column: Image and Connect */}
           <div className="md:col-span-1 space-y-6">
-            <div className="aspect-[4/5] rounded-lg overflow-hidden shadow-xl">
+            <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] border border-white/10 group">
               <img
                 src="/images/profile.jpg" // Replace with your actual photo URL
                 alt="Mohit 'Enji' Negi"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
             </div>
 
-            <div className="bg-secondary rounded-lg p-4 sm:p-6 shadow-lg">
-              <h3 className="text-xl font-semibold text-white mb-4">Connect with Enji</h3>
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
+              <h3 className="text-2xl font-semibold text-white mb-6 tracking-wide border-b border-white/10 pb-3">Connect with Enji</h3>
               <ul className="space-y-3">
                 <li>
                   <a
@@ -92,9 +99,9 @@ const About = () => {
 
           {/* Right Column: My Story and My Approach */}
           <div className="md:col-span-2 space-y-8">
-            <div className="bg-secondary rounded-lg p-5 sm:p-8 shadow-lg">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">My Story so far..</h2>
-              <ul className="space-y-4 text-gray-300 leading-relaxed list-none"> {/* Changed to list-none, using icons instead */}
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 tracking-tight border-b border-white/10 pb-4">My Story so far..</h2>
+              <ul className="space-y-6 text-gray-300 leading-relaxed list-none">
                 <li className="flex items-start">
                   <Lightbulb size={20} className="text-netflix mr-3 mt-1 flex-shrink-0" />
                   <span>
@@ -139,9 +146,10 @@ const About = () => {
               </ul>
             </div>
 
-            <div className="bg-secondary rounded-lg p-5 sm:p-8 shadow-lg">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">My Approach & Skills</h2>
-              <p className="text-gray-300 mb-4 leading-relaxed">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-netflix/5 blur-[80px] rounded-full pointer-events-none" />
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 tracking-tight border-b border-white/10 pb-4">My Approach & Skills</h2>
+              <p className="text-gray-300 mb-8 leading-relaxed text-lg">
                 I thrive on building solutions that are not only technically sound but also user-centric and performant. My approach is rooted in continuous learning and adapting the right technologies for the challenge at hand.
               </p>
               <div className="mb-6">

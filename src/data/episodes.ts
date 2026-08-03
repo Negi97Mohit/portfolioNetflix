@@ -3,138 +3,92 @@
 export const episodeData = [
   {
     id: 1,
-    title: "Episode 1: Lets talk Education & Certifications",
-    description: "My academic journey, including Master's and Bachelor's degrees, and key professional certifications.",
+    title: "Episode 1: Education",
+    description: "My academic journey, including Master's and Bachelor's degrees from Northeastern University and VIT University.",
     duration: "1 min",
-    thumbnail: "/images/education.png", // Using your specified local path
-    videoUrl: "/videos/episode1_education.mp4", // Using your specified local path
+    thumbnail: "/images/education.png",
+    videoUrl: "/videos/episode1_education.mp4",
     content: {
       highlights: [
-        "M.Sc. Information Systems - Northeastern University, Boston, MA (May 2023)",
-        "B.Tech. Mechanical Engineering (Spec. Automotive) - Vellore Institute of Technology, India (Jul 2018)",
-        "Certified in Generative AI & Cloud Computing (LinkedIn)",
-        "Red Hat OpenShift I: Containers & Kubernetes (DO180)"
+        "M.Sc. Information Systems - Northeastern University, Boston, MA",
+        "B.Tech. Mechanical Engineering (Spec. Automotive Tech) - VIT University, India"
       ],
       details: [
-        {
-          text: "Explore my academic foundation and ongoing professional development."
-        },
-        {
-          text: "I hold a Master of Science in Information Systems from Northeastern University, Boston (May 2023), where I deepened my understanding of advanced technology systems and solutions."
-        },
-        {
-          text: "Before that, I earned a B.Tech in Mechanical Engineering with a specialization in Automotive Technology from Vellore Institute of Technology, India (July 2018)."
-        },
-        {
-          text: "To remain current in the tech landscape, I pursued certifications such as:"
-        },
-        {
-          text: "- Generative AI in Cloud Computing: Core Concepts (LinkedIn)"
-        },
-        {
-          text: "- Red Hat OpenShift I: Containers & Kubernetes (DO180)"
-        },
-        {
-          text: "- Introduction to Large Language Models (LinkedIn)"
-        },
-        {
-          text: "- Learning Docker (LinkedIn)"
-        }
+        { text: "My educational background provides a strong foundation in both software engineering and systems." },
+        { text: "I earned a Master of Science in Information Systems from Northeastern University in Boston, MA." },
+        { text: "Prior to that, I completed my B.Tech in Mechanical Engineering (Specializing in Automotive Tech) at VIT University in Vellore, TN, India." }
       ]
     }
   },
   {
     id: 2,
-    title: "Episode 2: Experience & AI Conversation",
-    description: "A timeline of my professional roles, from AI Tech Creator and QA Software Engineer to Investment Sales Analyst.",
-    duration: "1 min",
-    thumbnail: "/images/experience.png", // Using your specified local path
-    videoUrl: "/videos/episode2_experience.mp4", // Using your specified local path
+    title: "Episode 2: Professional Experience",
+    description: "A timeline of my professional roles, from Founder & Forward Deployed Engineer to QA Software Engineer and Investment Sales Analyst.",
+    duration: "2 mins",
+    thumbnail: "/images/experience.png",
+    videoUrl: "/videos/episode2_experience.mp4",
     content: {
       highlights: [
-        "Creator | FUJM - fujm.org (GenAI Job Board) | Feb 2024 – Present",
+        "Founder & Forward Deployed Engineer | FUJM | Feb 2024 – Jul 2026",
         "QA Software Engineer | Dassault Systèmes | Aug 2022 – Dec 2023",
-        "Investment Sales Analyst | Huf Group | Nov 2018 – Nov 2020",
-        "Key achievements in AI development, test automation, and sales strategy."
+        "Investment Sales Analyst | HUF Group | Nov 2018 – Nov 2020"
       ],
       details: [
-        {
-          text: "A journey across diverse roles that honed my technical and business acumen."
-        },
-        {
-          text: "Currently, I'm the Creator of FUJM (%LINK%), a GenAI-powered job board. Since Feb 2024, I've led its MERN stack development, integrated Groq's GenAI for smart profile-job matching, and used Firebase under Google's Startup Program.",
-          link: { placeholder: "%LINK%", url: "https://fujm.org", label: "https://fujm.org" }
-        },
-        {
-          text: "Previously, I worked as a QA Software Engineer at Dassault Systèmes (Aug 2022 – Dec 2023) in Boston, MA. I developed 7+ automation scripts (Python, TypeScript, Shell), built QA automation POCs, streamlined regression testing using Selenium, and created ETL/data monitoring solutions. I also reduced user creation time by 67% through Jenkins-based Selenium automations."
-        },
-        {
-          text: "Earlier, I was an Investment Sales Analyst at Huf Group, Pune (Nov 2018 – Nov 2020), where I secured $15M+ in contracts via strategic marketing and increased market share by 18% through data forecasting. I also designed an SQL-driven pricing and strategy optimization database."
-        }
+        { text: "As a Founder & Forward Deployed Engineer at FUJM (Feb 2024 - Jul 2026), I architected a four-phase AI agent pipeline running fully on-device via Chrome's built-in Gemini Nano API, shipped as the MyTake Chrome extension (1,000+ MAU)." },
+        { text: "I built a production RAG pipeline with LangChain, validated with Pydantic AI & Giskard, and created an MCP-based multi-agent orchestration for voice-command web automation." },
+        { text: "Additionally, I designed a conversational DevOps/AIOps agent (GAKI) and scaled a GenAI-powered job board to 256 MAU with LLM-driven matching." },
+        { text: "Previously, as a QA Software Engineer at Dassault Systèmes (Aug 2022 - Dec 2023), I designed 7+ test suites in Python/TypeScript within Jenkins CI/CD, reducing cycle time by 30%. I built a Selenium regression framework and ETL monitoring dashboards, reducing user provisioning time by 67%." },
+        { text: "As an Investment Sales Analyst at HUF Group (Nov 2018 - Nov 2020), I secured $15M+ in contracts and drove 18% market share growth through data-driven forecasting." }
       ]
     }
   },
   {
     id: 3,
     title: "Episode 3: Skills",
-    description: "Technical and soft skills that make me a valuable asset for any team. From coding languages to leadership abilities, discover what I bring to the table.",
-    duration: "2 min",
-    thumbnail: "/images/skills.png", // Kept Unsplash link as per your input
-    videoUrl: "/videos/episode3_letter.mp4", // Using your specified local path
+    description: "Technical and soft skills that I bring to the table, including Cloud, DevOps, AI, and various programming languages.",
+    duration: "1 min",
+    thumbnail: "/images/skills.png",
+    videoUrl: "/videos/episode3_letter.mp4",
     content: {
-      highlights: [ // Kept highlights as per your input
-        "React, TypeScript, Next.js, Tailwind CSS",
-        "Node.js, Express, MongoDB, PostgreSQL",
-        "UI/UX Design, Responsive Web Design",
-        "Project Management, Team Leadership"
+      highlights: [
+        "Languages: Python, SQL, JavaScript, TypeScript, Shell, HTML/CSS",
+        "Frameworks & AI: React, Langchain, Keras, Hugging Face, Fast API, Django, Pydantic AI, MCP",
+        "Cloud & DevOps: Kubernetes, Git, Docker, Jenkins, Terraform, AWS, GCP, Vector DBs",
+        "Tools & Platforms: Snowflake, Tableau, Postman, Grafana, Prometheus, Selenium, Playwright",
+        "CAD Tools: ANSYS, SolidWorks, CATIA"
       ],
-      details: [ // Converted your provided string to the array/object format
-        {
-          text: "My technical expertise spans frontend and backend development, with a focus on creating performant and accessible web applications."
-        },
-        {
-          text: "Beyond coding, I pride myself on strong communication skills, problem-solving abilities, and adaptability."
-        }
+      details: [
+        { text: "My skill set covers the entire software development lifecycle, heavily leaning towards AI, cloud architecture, and robust automated testing." },
+        { text: "I have strong proficiency in Python, SQL, JS/TS, and building applications with React, Django, and FastAPI." },
+        { text: "I am deeply experienced in AI integrations, utilizing Langchain, Hugging Face, Pydantic AI, and vector databases like Milvus and FAISS." },
+        { text: "On the infrastructure side, I manage deployments using Docker, Kubernetes, AWS/GCP, Jenkins, Ansible, and Terraform." }
       ]
     }
   },
   {
     id: 4,
-    title: "Episode 4: Published AI webapps, extension and tools",
-    description: "A collection of my AI-powered web applications, browser extensions, and development tools, showcasing practical applications of Generative AI and automation.",
-    duration: "1 min",
-    thumbnail: "/images/aitools.png", // Kept Unsplash link
-    videoUrl: "/videos/episode5_AI.mp4", // Using your specified local path (noted filename)
+    title: "Episode 4: Published Chrome Extensions & Webapps",
+    description: "A collection of my published Chrome Extensions and web applications, showcasing Generative AI and automation with 1300+ downloads.",
+    duration: "2 mins",
+    thumbnail: "/images/aitools.png",
+    videoUrl: "/videos/episode5_AI.mp4",
     content: {
       highlights: [
-        "FUJM.org: GenAI Job Board (MERN Stack, Groq AI, Firebase)",
-        "AI Screen Reader Chrome Extension (GPT-powered)",
-        "Prompt-based Browse Automation (POC)",
-        "Universal Web Scrapper with AI Automation",
-        "WallofShade: Social Accountability Platform"
+        "1300+ Total Downloads across tools",
+        "Popup Search & MyTake - AI-powered Chrome Extensions",
+        "AI Tab & PageDiff - Browser tools for Q&A and page updates",
+        "GAKI - House of Video Creation & GAKI Toolkit orchestration",
+        "LinkedIn Ease - Productivity tool"
       ],
       details: [
-        {
-          text: "Dive into my AI Tech Creations."
-        },
-        {
-          text: "FUJM.org (AI Job Board: %LINK%), a GenAI job board, was developed using the MERN stack with Groq AI for profile analysis and job matching, leveraging Firebase under Google's Startup Program.",
-          link: { placeholder: "%LINK%", url: "https://fujm.org/", label: "https://fujm.org/" }
-        },
-        {
-          text: "I've also created Chrome Extensions like the AI Screen Reader by FUJM (Chrome Store: %LINK%) that uses GPTs to answer user questions about on-screen content.",
-          link: { placeholder: "%LINK%", url: "https://chrome.google.com/webstore/detail/jjbmecfljnhfmbcpkjlpnhdfheiapkid", label: "Chrome Store" }
-        },
-        {
-          text: "Explored prompt-based Browse automation (e.g., 'fill the form', 'book Airbnb') as a POC. Developed a Universal Web Scrapper performing DOM pre-operations and AI for final results."
-        },
-        {
-          text: "Additionally, built WallofShade (Social Accountability Platform: %LINK%), a social accountability platform.",
-          link: { placeholder: "%LINK%", url: "https://wallofshade.netlify.app/", label: "https://wallofshade.netlify.app/" }
-        }
+        { text: "My published applications have reached over 1300+ downloads." },
+        { text: "MyTake (%LINK%) is an on-device AI Chrome extension using Gemini Nano for natural-language DOM manipulation.", link: { placeholder: "%LINK%", url: "https://chromewebstore.google.com/", label: "Chrome Web" } },
+        { text: "Popup Search (%LINK%) is an in-browser AI-powered selection tool, and AI Tab (%LINK%) is an active browser tab Q&A via GPT.", link: { placeholder: "%LINK%", url: "https://chromewebstore.google.com/", label: "Chrome Web" } },
+        { text: "PageDiff (%LINK%) helps keep track of web page updates, while LinkedIn Ease (%LINK%) is a LinkedIn productivity tool.", link: { placeholder: "%LINK%", url: "https://chromewebstore.google.com/", label: "Chrome Web" } },
+        { text: "GAKI - House of Video Creation (%LINK%) is accessible online, and GAKI Toolkit is a multi-agent orchestration system with coordinator-worker architecture, triple-fallback LLM parser, eval CI integration, and RBAC per-user sandboxing.", link: { placeholder: "%LINK%", url: "https://gaki.netlify.app", label: "gaki.netlify.app" } }
       ]
     }
-  },
+  }
 ];
 
 // Helper functions remain the same

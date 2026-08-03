@@ -264,7 +264,7 @@ const VideoPlayer = ({
         </div>
 
         <div className="pb-2 px-2 md:pb-3 md:px-3 bg-gradient-to-t from-black/80 to-transparent">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1 group/progress relative px-2">
             <input
               ref={progressRef}
               type="range"
@@ -274,52 +274,58 @@ const VideoPlayer = ({
               onChange={handleProgressChange}
               onMouseDown={() => setIsSeeking(true)}
               onMouseUp={() => setIsSeeking(false)}
-              className="w-full h-1.5 md:h-2 bg-gray-500/50 rounded-full appearance-none cursor-pointer
-                         [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-netflix
-                         [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-netflix [&::-moz-range-thumb]:border-none
-                         focus:outline-none focus:ring-2 focus:ring-netflix/50"
+              style={{
+                background: `linear-gradient(to right, #E50914 ${(currentTime / duration) * 100 || 0}%, rgba(107, 114, 128, 0.5) ${(currentTime / duration) * 100 || 0}%)`
+              }}
+              className="w-full h-1 md:h-1.5 rounded-full appearance-none cursor-pointer transition-all duration-200 group-hover/progress:h-2 md:group-hover/progress:h-2.5
+                         [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-0 [&::-webkit-slider-thumb]:h-0 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#E50914] group-hover/progress:[&::-webkit-slider-thumb]:w-4 group-hover/progress:[&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:transition-all
+                         [&::-moz-range-thumb]:w-0 [&::-moz-range-thumb]:h-0 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#E50914] [&::-moz-range-thumb]:border-none group-hover/progress:[&::-moz-range-thumb]:w-4 group-hover/progress:[&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:transition-all
+                         focus:outline-none"
               aria-label="Video progress"
             />
           </div>
 
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2 md:gap-3">
+            <div className="flex items-center gap-2 md:gap-4">
               <button
                 onClick={togglePlayPause}
-                className="text-white hover:text-netflix transition-colors p-1.5 md:p-2 rounded-md hover:bg-white/20"
+                className="text-white hover:text-white/80 transition-colors p-1.5 md:p-2 rounded-md"
                 aria-label={isPlaying ? "Pause" : "Play"}
               >
-                {/* Removed md:size prop */}
-                {isPlaying ? <Pause size={22} /> : <Play size={22} />}
+                {isPlaying ? <Pause size={28} fill="currentColor" /> : <Play size={28} fill="currentColor" />}
               </button>
 
               <div className="flex items-center group/volume">
                 <button
                   onClick={toggleMute}
-                  className="text-white hover:text-netflix transition-colors p-1.5 md:p-2 rounded-md hover:bg-white/20"
+                  className="text-white hover:text-white/80 transition-colors p-1.5 md:p-2 rounded-md"
                   aria-label={isMuted ? "Unmute" : "Mute"}
                 >
-                  {/* Removed md:size prop */}
-                  {isMuted || volume === 0 ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                  {isMuted || volume === 0 ? <VolumeX size={24} /> : <Volume2 size={24} />}
                 </button>
-                <input
-                  ref={volumeRef}
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.05"
-                  value={isMuted ? 0 : volume}
-                  onChange={handleVolumeChange}
-                  className="w-0 h-1.5 md:h-2 bg-gray-500/50 rounded-full appearance-none cursor-pointer transition-all duration-200 ease-in-out group-hover/volume:w-16 md:group-hover/volume:w-20 ml-0 group-hover/volume:ml-1
-                             [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-netflix
-                             [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-netflix [&::-moz-range-thumb]:border-none
-                             focus:outline-none focus:ring-2 focus:ring-netflix/50"
-                  aria-label="Volume"
-                />
+                <div className="w-0 overflow-hidden transition-all duration-300 ease-out group-hover/volume:w-20 md:group-hover/volume:w-24 flex items-center opacity-0 group-hover/volume:opacity-100">
+                  <input
+                    ref={volumeRef}
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    value={isMuted ? 0 : volume}
+                    onChange={handleVolumeChange}
+                    style={{
+                      background: `linear-gradient(to right, #E50914 ${(isMuted ? 0 : volume) * 100}%, rgba(107, 114, 128, 0.5) ${(isMuted ? 0 : volume) * 100}%)`
+                    }}
+                    className="w-full h-1 md:h-1.5 rounded-full appearance-none cursor-pointer transition-all duration-200
+                               [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#E50914]
+                               [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#E50914] [&::-moz-range-thumb]:border-none
+                               focus:outline-none"
+                    aria-label="Volume"
+                  />
+                </div>
               </div>
 
-              <span className="text-white text-xs md:text-sm font-mono">
-                {formatTime(currentTime)} / {formatTime(duration)}
+              <span className="text-white font-medium text-sm md:text-base ml-2">
+                {formatTime(currentTime)} <span className="text-gray-400 mx-1">/</span> {formatTime(duration)}
               </span>
             </div>
 
