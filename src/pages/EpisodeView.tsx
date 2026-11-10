@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react"; // Added React import for type usage
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import VideoPlayer from "../components/VideoPlayer"; // Ensure this path is correct
-import { episodeData, getEpisodeById, getNextEpisode } from "../data/episodes"; // Ensure this path is correct
+import VideoPlayer from "../components/VideoPlayer";
+import { episodeData, getEpisodeById, getNextEpisode } from "../data/episodes";
+import { publishedApps } from "../data/apps";
+import { ExternalLink, ArrowLeft, ArrowUpRight, Github } from "lucide-react";
 
-// Define the type for a single detail item, including the optional link
 interface DetailItem {
   text: string;
   link?: {
@@ -13,46 +14,43 @@ interface DetailItem {
   };
 }
 
-// Helper function to render a paragraph with an optional link
 const renderDetailParagraph = (detail: DetailItem, index: number): JSX.Element => {
-  // Type guard for detail object
-  if (typeof detail !== 'object' || detail === null || typeof detail.text !== 'string') {
-    console.error("Invalid detail item:", detail);
+  if (typeof detail !== "object" || detail === null || typeof detail.text !== "string") {
     return <p key={index} className="text-red-500">Error: Invalid detail format.</p>;
   }
 
-  if (detail.link && typeof detail.link === 'object' && detail.link.placeholder && detail.link.url && detail.link.label) {
+  if (detail.link && typeof detail.link === "object" && detail.link.placeholder && detail.link.url && detail.link.label) {
     const parts = detail.text.split(detail.link.placeholder);
     return (
-      <p key={index} className="text-gray-300 text-sm lg:text-base leading-relaxed mb-3">
+      <p key={index} className="text-zinc-300 text-xs sm:text-sm leading-relaxed mb-2.5">
         {parts[0]}
         <a
           href={detail.link.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-netflix hover:text-netflix-hover underline"
+          className="text-netflix hover:underline font-semibold inline-flex items-center gap-1"
         >
           {detail.link.label}
+          <ExternalLink size={11} className="inline" />
         </a>
-        {parts.length > 1 ? parts[1] : ''} {/* Handle cases where placeholder might not be at the end */}
+        {parts.length > 1 ? parts[1] : ""}
       </p>
     );
   }
-  // If no link, or link object is malformed, just render the text.
+
   return (
-    <p key={index} className="text-gray-300 text-sm lg:text-base leading-relaxed mb-3">
+    <p key={index} className="text-zinc-300 text-xs sm:text-sm leading-relaxed mb-2.5">
       {detail.text}
     </p>
   );
 };
 
-
 const EpisodeView = () => {
-  const { id } = useParams<{ id: string }>(); // Add type for useParams
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [videoEnded, setVideoEnded] = useState(false);
 
-  const episodeId = id ? parseInt(id, 10) : undefined; // Use radix 10 for parseInt
+  const episodeId = id ? parseInt(id, 10) : undefined;
   const episode = episodeId !== undefined ? getEpisodeById(episodeId) : undefined;
   const nextEpisode = episodeId !== undefined ? getNextEpisode(episodeId) : undefined;
 
@@ -62,9 +60,9 @@ const EpisodeView = () => {
 
   if (!episode) {
     return (
-      <div className="h-screen bg-black flex items-center justify-center flex-col gap-4 text-white">
-        <h1 className="text-2xl">Episode not found</h1>
-        <Link to="/episodes" className="text-netflix hover:text-netflix-hover">
+      <div className="h-screen bg-[#141414] flex items-center justify-center flex-col gap-4 text-white font-sans">
+        <h1 className="text-2xl font-bold">Episode not found</h1>
+        <Link to="/episodes" className="netflix-button">
           Back to Episodes
         </Link>
       </div>
@@ -79,18 +77,26 @@ const EpisodeView = () => {
     if (nextEpisode) {
       navigate(`/episodes/${nextEpisode.id}`);
     } else {
-      navigate('/episodes');
+      navigate("/episodes");
     }
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white font-sans selection:bg-netflix selection:text-white">
       {videoEnded ? (
-        <div className="h-screen bg-black flex items-center justify-center flex-col p-6">
-          <div className="max-w-md text-center">
-            <h2 className="text-2xl text-white mb-4">You've completed Episode {episode.id}</h2>
-            <p className="text-gray-400 mb-8">{episode.title}</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="h-screen bg-[#141414] flex items-center justify-center flex-col p-6">
+          <div className="max-w-md text-center space-y-4">
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-netflix font-black text-2xl">N</span>
+              <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">
+                Episode Complete
+              </span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Finished Episode {episode.id}
+            </h2>
+            <p className="text-zinc-400 text-sm">{episode.title}</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
               {nextEpisode ? (
                 <button onClick={handleWatchNext} className="netflix-button">
                   Watch Next Episode
@@ -107,81 +113,140 @@ const EpisodeView = () => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col md:flex-row h-screen">
-          {/* Video Player Section */}
+        <div className="flex flex-col md:flex-row h-screen overflow-hidden">
+          {/* Back Button */}
+          <Link
+            to="/episodes"
+            className="absolute top-4 left-4 z-40 bg-black/60 hover:bg-black/80 text-white p-2.5 rounded-full border border-zinc-700 transition-transform hover:scale-105"
+            title="Back to Episodes"
+          >
+            <ArrowLeft size={18} />
+          </Link>
+
+          {/* Video Player Section (Left 2/3) */}
           <div className="w-full md:w-2/3 h-1/2 md:h-full bg-black">
             <VideoPlayer
               src={episode.videoUrl}
               title={episode.title}
-              episodeNumber={episode.id} // Use episode.id directly
+              episodeNumber={episode.id}
               totalEpisodes={episodeData.length}
               onEnd={handleVideoEnd}
             />
           </div>
 
-          {/* Information Section (Right Panel) with Netflix Glass Effect */}
-          <div className="w-full md:w-1/3 h-1/2 md:h-full relative overflow-hidden bg-black border-t md:border-t-0 md:border-l border-white/10 shadow-2xl">
-            {/* Background Blur Image */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-[60px] opacity-40 scale-125" 
-              style={{ backgroundImage: `url(${episode.thumbnail})` }} 
-            />
-            
-            {/* Glass Content Container */}
-            <div className="absolute inset-0 bg-black/40 backdrop-blur-2xl overflow-y-auto">
-              <div className="p-6 md:p-10 pb-20">
-                <div className="mb-6 relative rounded-xl overflow-hidden shadow-2xl border border-white/10 group">
-                  <img
-                    src={episode.thumbnail}
-                    alt={episode.title}
-                    className="w-full h-auto max-h-56 object-cover transform group-hover:scale-105 transition-transform duration-700"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.onerror = null;
-                      target.src = 'https://placehold.co/600x400/222/fff?text=Thumbnail+Not+Found';
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+          {/* Netflix Right Details Drawer (Right 1/3) */}
+          <div className="w-full md:w-1/3 h-1/2 md:h-full bg-[#181818] border-t md:border-t-0 md:border-l border-zinc-800 overflow-y-auto">
+            <div className="p-6 md:p-8 space-y-6">
+              {/* Episode Header */}
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="netflix-match">99% Match</span>
+                  <span className="netflix-tag">16+</span>
+                  <span className="text-zinc-400 text-xs">{episode.duration}</span>
+                  <span className="text-zinc-400 text-xs border border-zinc-700 px-1 py-0.5 rounded-sm">
+                    Ultra HD
+                  </span>
                 </div>
-                
-                <h2 className="text-2xl lg:text-3xl font-bold text-white mb-2 tracking-tight">{episode.title}</h2>
-                
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="text-green-400 font-medium text-sm">98% Match</span>
-                  <span className="text-gray-300 text-sm border border-gray-600 px-1.5 py-0.5 rounded-sm">{episode.duration}</span>
-                  <span className="text-gray-300 text-sm">HD</span>
-                </div>
-                
-                <p className="text-white text-base lg:text-lg leading-relaxed mb-8 font-medium">{episode.description}</p>
-
-                {episode.content.highlights && episode.content.highlights.length > 0 && (
-                  <div className="mb-8">
-                    <h3 className="text-gray-400 uppercase tracking-widest text-xs font-semibold mb-4 border-b border-white/10 pb-2">Highlights</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {episode.content.highlights.map((highlight, index) => (
-                        <span key={index} className="bg-white/10 hover:bg-white/20 transition-colors border border-white/5 text-gray-200 px-3 py-1.5 rounded-full text-xs lg:text-sm backdrop-blur-md">
-                          {highlight}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {episode.content.details && (
-                  <div>
-                    <h3 className="text-gray-400 uppercase tracking-widest text-xs font-semibold mb-4 border-b border-white/10 pb-2">Details</h3>
-                    <div className="space-y-4">
-                      {Array.isArray(episode.content.details)
-                        ? episode.content.details.map((detailItem, index) =>
-                            renderDetailParagraph(detailItem as DetailItem, index)
-                          )
-                        : typeof episode.content.details === 'string'
-                        ? <p className="text-gray-300 text-sm lg:text-base leading-relaxed">{episode.content.details}</p>
-                        : null}
-                    </div>
-                  </div>
-                )}
+                <h2 className="text-2xl font-bold text-white tracking-tight">
+                  {episode.title}
+                </h2>
+                <p className="text-zinc-300 text-sm mt-2 leading-relaxed">
+                  {episode.description}
+                </p>
               </div>
+
+              {/* Shipped Extensions & Apps tray if Episode 4 */}
+              {episode.id === 4 && (
+                <div className="border-t border-zinc-800 pt-4">
+                  <h3 className="text-xs uppercase font-extrabold tracking-wider text-zinc-400 mb-3 flex items-center gap-1.5">
+                    <span className="text-netflix font-black">N</span> Shipped Extensions & Tools
+                  </h3>
+                  <div className="grid grid-cols-1 gap-2.5">
+                    {publishedApps.map((app) => (
+                      <div
+                        key={app.id}
+                        className="flex items-center justify-between p-2.5 rounded bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition-colors"
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <img
+                            src={app.icon}
+                            alt={app.name}
+                            className="w-8 h-8 rounded object-contain bg-black p-1 flex-shrink-0"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = "/logo.png";
+                            }}
+                          />
+                          <div className="min-w-0 truncate">
+                            <div className="text-xs font-bold text-white truncate">
+                              {app.name}
+                            </div>
+                            <div className="text-[10px] text-zinc-400 truncate">
+                              {app.badge || app.stats}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-1 flex-shrink-0">
+                          {app.githubUrl && (
+                            <a
+                              href={app.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[11px] font-semibold text-zinc-400 hover:text-white px-2 py-1 rounded bg-zinc-800 transition-colors"
+                            >
+                              Code
+                            </a>
+                          )}
+                          <a
+                            href={app.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[11px] font-bold text-white hover:text-netflix px-2 py-1 rounded bg-zinc-800 transition-colors inline-flex items-center gap-0.5"
+                          >
+                            <span>Open</span>
+                            <ArrowUpRight size={10} />
+                          </a>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Highlights */}
+              {episode.content.highlights && episode.content.highlights.length > 0 && (
+                <div className="border-t border-zinc-800 pt-4">
+                  <h3 className="text-zinc-400 uppercase tracking-widest text-xs font-bold mb-3">
+                    Key Highlights
+                  </h3>
+                  <ul className="space-y-1.5 text-xs text-zinc-300 list-disc list-inside">
+                    {episode.content.highlights.map((highlight, index) => (
+                      <li key={index} className="leading-relaxed">
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Deep Details */}
+              {episode.content.details && (
+                <div className="border-t border-zinc-800 pt-4">
+                  <h3 className="text-zinc-400 uppercase tracking-widest text-xs font-bold mb-3">
+                    Episode Details
+                  </h3>
+                  <div className="space-y-2">
+                    {Array.isArray(episode.content.details)
+                      ? episode.content.details.map((detailItem, index) =>
+                          renderDetailParagraph(detailItem as DetailItem, index)
+                        )
+                      : typeof episode.content.details === "string"
+                      ? <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">{episode.content.details}</p>
+                      : null}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

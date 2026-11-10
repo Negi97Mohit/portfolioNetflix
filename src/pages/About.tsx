@@ -1,190 +1,304 @@
-import Navbar from "../components/Navbar"; // Ensure this path is correct
-import Footer from "../components/Footer"; // Ensure this path is correct
-import { Link } from "react-router-dom"; // For internal links if any
-import { Github, Linkedin, Mail, Briefcase, ExternalLink, CheckCircle, Zap, Target, BrainCircuit, Lightbulb, Code2 } from "lucide-react"; // Added more icons
+import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import AppsShowcase from "../components/AppsShowcase";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Briefcase,
+  GraduationCap,
+  Terminal,
+  ExternalLink,
+  Layers,
+  MapPin
+} from "lucide-react";
 
 const About = () => {
-  const portfolioUrl = "https://engiportfolio.netlify.app/"; // Your portfolio link
-  const fujmUrl = "https://fujm.org/";
-  const wallOfShadeUrl = "https://wallofshade.netlify.app/";
-  const aiScreenReaderUrl = "https://chrome.google.com/webstore/detail/ai-screen-reader-by-fujm/jjbmecfljnhfmbcpkjlpnhdfheiapkid";
-
-
   return (
-    <div className="min-h-screen bg-black text-white relative">
+    <div className="min-h-screen bg-[#141414] text-white font-sans selection:bg-netflix selection:text-white">
       <Navbar />
 
-      {/* Decorative background gradients for glass effect */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-netflix/20 blur-[120px] rounded-full" />
-        <div className="absolute top-[20%] right-[-10%] w-[30%] h-[30%] bg-blue-600/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] left-[20%] w-[40%] h-[40%] bg-zinc-800/40 blur-[120px] rounded-full" />
-      </div>
+      <div className="pt-24 sm:pt-28 pb-20 px-6 sm:px-12 md:px-16 max-w-7xl mx-auto space-y-12">
+        {/* ====================================================================== */}
+        {/* 1. CREATOR HERO — Big Profile Picture + Bio Side-by-Side               */}
+        {/* ====================================================================== */}
+        <section className="relative bg-[#181818] border border-zinc-800 rounded-lg overflow-hidden shadow-2xl">
+          {/* Netflix red top accent */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-netflix" />
 
-      <div className="pt-24 md:pt-32 pb-16 px-4 sm:px-6 max-w-screen-xl mx-auto relative z-10">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-center text-white mb-12 md:mb-16 tracking-tight">
-          About Me
-        </h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
-          {/* Left Column: Image and Connect */}
-          <div className="md:col-span-1 space-y-6">
-            <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] border border-white/10 group">
-              <img
-                src="/images/profile.jpg" // Replace with your actual photo URL
-                alt="Mohit 'Enji' Negi"
-                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-              />
+          <div className="flex flex-col md:flex-row">
+            {/* BIG Profile Photo (left or top on mobile) */}
+            <div className="md:w-[400px] lg:w-[460px] flex-shrink-0">
+              <div className="aspect-[3/4] md:h-full w-full overflow-hidden">
+                <img
+                  src="/images/profile.jpg"
+                  alt="Mohit 'Enji' Negi"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "/logo.png";
+                  }}
+                />
+              </div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
-              <h3 className="text-2xl font-semibold text-white mb-6 tracking-wide border-b border-white/10 pb-3">Connect with Enji</h3>
-              <ul className="space-y-3">
-                <li>
-                  <a
-                    href="mailto:mohit.snegi123@gmail.com"
-                    className="flex items-center text-gray-300 hover:text-netflix transition-colors group"
-                  >
-                    <Mail size={18} className="mr-3 group-hover:text-netflix" />
-                    mohit.snegi123@gmail.com
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.linkedin.com/in/mohit-singh-negi/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-gray-300 hover:text-netflix transition-colors group"
-                  >
-                    <Linkedin size={18} className="mr-3 group-hover:text-netflix" />
-                    LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/Negi97Mohit"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-gray-300 hover:text-netflix transition-colors group"
-                  >
-                    <Github size={18} className="mr-3 group-hover:text-netflix" />
-                    GitHub
-                  </a>
-                </li>
-                 <li>
-                  <a
-                    href={fujmUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-gray-300 hover:text-netflix transition-colors group"
-                  >
-                    <Briefcase size={18} className="mr-3 group-hover:text-netflix" />
-                    FUJM.org (Creations)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={portfolioUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-gray-300 hover:text-netflix transition-colors group"
-                  >
-                    <ExternalLink size={18} className="mr-3 group-hover:text-netflix" />
-                    This Portfolio
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+            {/* Bio Panel (right side) */}
+            <div className="flex-1 p-6 sm:p-8 lg:p-10 flex flex-col justify-center space-y-5">
+              <div className="flex items-center gap-2">
+                <span className="text-netflix font-black text-2xl tracking-tighter">N</span>
+                <span className="text-zinc-400 text-xs uppercase font-extrabold tracking-[0.2em]">
+                  CREATOR PROFILE
+                </span>
+              </div>
 
-          {/* Right Column: My Story and My Approach */}
-          <div className="md:col-span-2 space-y-8">
-            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 tracking-tight border-b border-white/10 pb-4">My Story so far..</h2>
-              <ul className="space-y-6 text-gray-300 leading-relaxed list-none">
-                <li className="flex items-start">
-                  <Lightbulb size={20} className="text-netflix mr-3 mt-1 flex-shrink-0" />
-                  <span>
-                    Who am i??? I am glad u asked, am a builder, learner, memer and a 24*7 dreamer. I transitioned from Mechanical Engineering (VIT) and Investment Sales to QA Software Engineering and AI-driven development, with an M.Sc. in Information Systems (Northeastern University) strengthening my tech foundation.
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <Zap size={20} className="text-netflix mr-3 mt-1 flex-shrink-0" />
-                  <span>
-                    At Dassault Systèmes (QA Software Engineer):
-                    <ul className="list-disc list-inside pl-5 mt-2 space-y-1">
-                        <li>Spearheaded deployment of 7+ automation scripts (Python, TypeScript, Shell) in CI/CD, enhancing product lifecycle efficiency.</li>
-                        <li>Developed POCs, automated regression tests with Selenium (30% time reduction), built ETL pipelines, and created script monitoring dashboards.</li>
-                        <li>Achieved a 67% reduction in user creation time via Python Selenium automations.</li>
-                    </ul>
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <Target size={20} className="text-netflix mr-3 mt-1 flex-shrink-0" />
-                  <span>
-                    At Huf Group (Investment Sales Analyst): Contributed to securing multi-million dollar contracts by leveraging data analysis and market research.
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <BrainCircuit size={20} className="text-netflix mr-3 mt-1 flex-shrink-0" />
-                  <span>
-                    Current Focus - AI Tech Creations:
-                    <ul className="list-disc list-inside pl-5 mt-2 space-y-1">
-                        <li>Creator of <a href={fujmUrl} target="_blank" rel="noopener noreferrer" className="text-netflix hover:underline">FUJM.org</a>, a GenAI job platform (MERN stack, Groq AI).</li>
-                        <li>Developed Chrome extensions like the <a href={aiScreenReaderUrl} target="_blank" rel="noopener noreferrer" className="text-netflix hover:underline">AI Screen Reader</a> (GPT-powered).</li>
-                        <li>Explored prompt-based browsing automation and built a universal web scraper.</li>
-                        <li>Launched <a href={wallOfShadeUrl} target="_blank" rel="noopener noreferrer" className="text-netflix hover:underline">WallofShade</a>, a social accountability platform.</li>
-                    </ul>
-                  </span>
-                </li>
-                 <li className="flex items-start">
-                  <Code2 size={20} className="text-netflix mr-3 mt-1 flex-shrink-0" />
-                  <span>
-                    This Netflix-style portfolio showcases my creative and technical capabilities.
-                  </span>
-                </li>
-              </ul>
-            </div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+                Mohit "Enji" Negi
+              </h1>
 
-            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-netflix/5 blur-[80px] rounded-full pointer-events-none" />
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 tracking-tight border-b border-white/10 pb-4">My Approach & Skills</h2>
-              <p className="text-gray-300 mb-8 leading-relaxed text-lg">
-                I thrive on building solutions that are not only technically sound but also user-centric and performant. My approach is rooted in continuous learning and adapting the right technologies for the challenge at hand.
+              <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
+                <span className="text-netflix font-bold">Founding Forward Deployed Engineer</span>
+                <span className="text-zinc-600">•</span>
+                <span className="flex items-center gap-1 text-zinc-400">
+                  <MapPin size={13} /> Boston, MA / Remote
+                </span>
+                <span className="text-zinc-600">•</span>
+                <span className="netflix-tag">Season 1</span>
+              </div>
+
+              <p className="text-zinc-300 text-sm leading-relaxed max-w-xl">
+                On-device AI agent pipelines via Gemini Nano, production RAG with LangChain & Pydantic AI, and browser intelligence tools with 3,500+ downloads.
               </p>
-              <div className="mb-6">
-                <h4 className="text-lg font-semibold text-white mb-2">Core Principles:</h4>
-                <ul className="list-disc list-inside text-gray-300 space-y-1">
-                    <li>User-Focused Solutions</li>
-                    <li>Performance and Efficiency</li>
-                    <li>Data-Driven Decisions</li>
-                    <li>Continuous Learning & Adaptation</li>
-                </ul>
+
+              {/* Contact Buttons */}
+              <div className="flex flex-wrap items-center gap-2.5 pt-1">
+                <a href="mailto:enjimohitnegi@gmail.com" className="netflix-play-button !text-xs !py-2 !px-4">
+                  <Mail size={14} />
+                  <span>enjimohitnegi@gmail.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/mohit-singh-negi/" target="_blank" rel="noopener noreferrer" className="netflix-secondary-button !text-xs !py-2 !px-4">
+                  <Linkedin size={14} />
+                  <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/Negi97Mohit" target="_blank" rel="noopener noreferrer" className="netflix-secondary-button !text-xs !py-2 !px-4">
+                  <Github size={14} />
+                  <span>GitHub</span>
+                </a>
               </div>
-              <div className="mb-6">
-                <h4 className="text-lg font-semibold text-white mb-2">Programming Languages:</h4>
-                <p className="text-gray-300 leading-relaxed">Python, SQL, JavaScript, TypeScript, HTML, CSS, Shell</p>
-              </div>
-              <div className="mb-6">
-                <h4 className="text-lg font-semibold text-white mb-2">Frameworks & AI:</h4>
-                <p className="text-gray-300 leading-relaxed">React, Node.js, Express.js (MERN Stack), Keras, Langchain, Openrouter, Amazon NOVA, FastAPI, Hugging Face Agents, Groq</p>
-              </div>
-              <div className="mb-6">
-                <h4 className="text-lg font-semibold text-white mb-2">Tools & Platforms:</h4>
-                <p className="text-gray-300 leading-relaxed">Git, Jenkins, Docker, Terraform, Ansible, AWS, GCP, Firebase, MongoDB, Netlify, Snowflake, Tableau, Postman, Cursor</p>
-              </div>
-               <div>
-                <h4 className="text-lg font-semibold text-white mb-2">Certifications:</h4>
-                <ul className="list-disc list-inside text-gray-300 space-y-1">
-                    <li>Generative AI (Artificial Intelligence) in Cloud Computing: Core Concepts (LinkedIn)</li>
-                    <li>Red Hat OpenShift I: Containers & Kubernetes (DO180)</li>
-                    <li>Introduction to Large Language Models (LinkedIn)</li>
-                    <li>Learning Docker (LinkedIn)</li>
-                </ul>
+
+              {/* Stats Row */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-zinc-800">
+                <div className="text-center sm:text-left">
+                  <div className="text-xl sm:text-2xl font-black text-white">3,500+</div>
+                  <div className="text-[10px] uppercase tracking-wider text-zinc-400 font-semibold">Downloads</div>
+                </div>
+                <div className="text-center sm:text-left">
+                  <div className="text-xl sm:text-2xl font-black text-netflix">1,000+</div>
+                  <div className="text-[10px] uppercase tracking-wider text-zinc-400 font-semibold">Nano MAU</div>
+                </div>
+                <div className="text-center sm:text-left">
+                  <div className="text-xl sm:text-2xl font-black text-white">$15M+</div>
+                  <div className="text-[10px] uppercase tracking-wider text-zinc-400 font-semibold">Contracts</div>
+                </div>
+                <div className="text-center sm:text-left">
+                  <div className="text-xl sm:text-2xl font-black text-amber-400">Featured</div>
+                  <div className="text-[10px] uppercase tracking-wider text-zinc-400 font-semibold">Chrome Store</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* ====================================================================== */}
+        {/* 2. SHIPPED APPS — Horizontal scroll                                    */}
+        {/* ====================================================================== */}
+        <section>
+          <AppsShowcase
+            title="Shipped Apps & Chrome Extensions"
+            subtitle="Live tools built by Enji with on-device AI, autonomous agents, and ambient DOM intelligence."
+          />
+        </section>
+
+        {/* ====================================================================== */}
+        {/* 3. CAREER TIMELINE                                                     */}
+        {/* ====================================================================== */}
+        <section className="space-y-4">
+          <div className="border-b border-zinc-800 pb-3">
+            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2.5">
+              <Briefcase size={22} className="text-netflix" />
+              Career Track & Production Impact
+            </h2>
+          </div>
+
+          {/* FUJM */}
+          <div className="bg-[#181818] border border-zinc-800 rounded-md p-5 sm:p-6 hover:border-zinc-700 transition-colors">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+              <div>
+                <span className="text-xs font-bold text-netflix uppercase tracking-wider">FUJM</span>
+                <h3 className="text-lg font-bold text-white">Founding Forward Deployed Engineer</h3>
+              </div>
+              <span className="text-xs text-zinc-400 bg-zinc-800 px-2.5 py-1 rounded inline-block w-fit">Feb 2024 – Jul 2026 • Boston / Remote</span>
+            </div>
+            <ul className="mt-3 space-y-2 text-xs sm:text-sm text-zinc-300 list-disc list-inside leading-relaxed">
+              <li><strong className="text-white">On-Device AI:</strong> 4-phase agent pipeline on Gemini Nano (<strong className="text-netflix">MyTake: 1,000+ MAU</strong>).</li>
+              <li><strong className="text-white">RAG Pipeline:</strong> LangChain + Pydantic AI + Giskard golden-dataset validation; MCP multi-agent voice automation.</li>
+              <li><strong className="text-white">GAKI:</strong> Conversational DevOps/AIOps agent with automated RCA and remediation.</li>
+              <li><strong className="text-white">Platform Growth:</strong> GenAI job board scaled to 256 MAU with LLM matching.</li>
+            </ul>
+          </div>
+
+          {/* Dassault Systèmes */}
+          <div className="bg-[#181818] border border-zinc-800 rounded-md p-5 sm:p-6 hover:border-zinc-700 transition-colors">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+              <div>
+                <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Dassault Systèmes — ENOVIA Cloud PLM</span>
+                <h3 className="text-lg font-bold text-white">QA Software Engineer</h3>
+              </div>
+              <span className="text-xs text-zinc-400 bg-zinc-800 px-2.5 py-1 rounded inline-block w-fit">Aug 2022 – Dec 2023 • Boston, MA</span>
+            </div>
+            <ul className="mt-3 space-y-2 text-xs sm:text-sm text-zinc-300 list-disc list-inside leading-relaxed">
+              <li>Automated 7+ test suites in Python/TS within Jenkins CI/CD — <strong className="text-white">30% cycle reduction</strong>.</li>
+              <li>Built Selenium regression framework & ETL monitoring dashboards.</li>
+              <li>Reduced user provisioning time by <strong className="text-white">67%</strong> via automation.</li>
+            </ul>
+          </div>
+
+          {/* HUF Group */}
+          <div className="bg-[#181818] border border-zinc-800 rounded-md p-5 sm:p-6 hover:border-zinc-700 transition-colors">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+              <div>
+                <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">HUF Group</span>
+                <h3 className="text-lg font-bold text-white">Investment Sales Analyst</h3>
+              </div>
+              <span className="text-xs text-zinc-400 bg-zinc-800 px-2.5 py-1 rounded inline-block w-fit">Nov 2018 – Nov 2020 • Pune, India</span>
+            </div>
+            <ul className="mt-3 space-y-2 text-xs sm:text-sm text-zinc-300 list-disc list-inside leading-relaxed">
+              <li>Secured <strong className="text-white">$15M+ in contracts</strong> through cost analysis & stakeholder management.</li>
+              <li>Drove <strong className="text-white">18% market share growth</strong> via data-driven forecasting.</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* ====================================================================== */}
+        {/* 4. OPEN SOURCE & PROJECTS                                              */}
+        {/* ====================================================================== */}
+        <section className="space-y-4">
+          <div className="border-b border-zinc-800 pb-3">
+            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2.5">
+              <Terminal size={22} className="text-netflix" />
+              Open Source & AI Innovations
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-[#181818] border border-zinc-800 rounded-md p-5 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-netflix uppercase">CERN INSPIRE</span>
+                <span className="text-[10px] bg-zinc-800 px-2 py-0.5 rounded text-zinc-400">High Energy Physics</span>
+              </div>
+              <h3 className="text-base font-bold text-white">Author Testing & Query Parser Fixes</h3>
+              <ul className="text-xs text-zinc-300 space-y-2 list-disc list-inside leading-relaxed">
+                <li>Backoffice author-list testing UI — PR <span className="text-netflix font-mono">inspirehep#4638</span>.</li>
+                <li>Fixed critical query-parser crash; <strong className="text-white">405 tests passed</strong> — PR <span className="text-netflix font-mono">#181</span>.</li>
+              </ul>
+            </div>
+
+            <div className="bg-[#181818] border border-zinc-800 rounded-md p-5 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-zinc-400 uppercase">Interactive AI Systems</span>
+                <span className="text-[10px] bg-zinc-800 px-2 py-0.5 rounded text-zinc-400">Production</span>
+              </div>
+              <h3 className="text-base font-bold text-white">CERN CRIC Explorer & Pa 3D Co-Star</h3>
+              <ul className="text-xs text-zinc-300 space-y-2 list-disc list-inside leading-relaxed">
+                <li><strong className="text-white">CRIC WLCG:</strong> FastAPI multi-source reconciliation of GOCDB, BDII, OSG data.</li>
+                <li><strong className="text-white">Pa 3D:</strong> Three.js AI companion with streaming speech, LLMs, and OBS integration.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ====================================================================== */}
+        {/* 5. SKILLS & EDUCATION — Clean 2-column                                 */}
+        {/* ====================================================================== */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Skills */}
+          <div className="bg-[#181818] border border-zinc-800 rounded-md p-6 space-y-4">
+            <h3 className="text-lg font-bold text-white flex items-center gap-2 border-b border-zinc-800 pb-3">
+              <Layers size={18} className="text-netflix" />
+              Technical Arsenal
+            </h3>
+
+            <div className="space-y-3 text-xs">
+              <div>
+                <span className="text-zinc-400 font-bold uppercase tracking-wider text-[10px] block mb-1.5">Languages</span>
+                <div className="flex flex-wrap gap-1.5">
+                  {["Python", "SQL", "JavaScript", "TypeScript", "Shell", "HTML/CSS"].map(s => (
+                    <span key={s} className="px-2.5 py-1 rounded bg-zinc-900 border border-zinc-700/80 text-zinc-200 font-medium">{s}</span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <span className="text-zinc-400 font-bold uppercase tracking-wider text-[10px] block mb-1.5">AI, LLMs & Agents</span>
+                <div className="flex flex-wrap gap-1.5">
+                  {["Gemini Nano", "LangChain", "Pydantic AI", "MCP", "FastAPI", "Django", "React", "Keras", "Hugging Face"].map(s => (
+                    <span key={s} className="px-2.5 py-1 rounded bg-netflix/10 border border-netflix/30 text-white font-medium">{s}</span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <span className="text-zinc-400 font-bold uppercase tracking-wider text-[10px] block mb-1.5">Cloud & DevOps</span>
+                <div className="flex flex-wrap gap-1.5">
+                  {["Kubernetes", "Docker", "Jenkins", "Terraform", "AWS", "GCP", "Milvus", "FAISS"].map(s => (
+                    <span key={s} className="px-2.5 py-1 rounded bg-zinc-900 border border-zinc-700/80 text-zinc-200 font-medium">{s}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Education & Certs */}
+          <div className="bg-[#181818] border border-zinc-800 rounded-md p-6 space-y-4">
+            <h3 className="text-lg font-bold text-white flex items-center gap-2 border-b border-zinc-800 pb-3">
+              <GraduationCap size={18} className="text-netflix" />
+              Education & Credentials
+            </h3>
+
+            <div className="space-y-3">
+              <div className="p-3 rounded bg-zinc-900 border border-zinc-800">
+                <span className="text-sm font-bold text-white block">M.Sc. Information Systems</span>
+                <span className="text-xs text-netflix font-medium">Northeastern University</span>
+                <span className="text-[10px] text-zinc-400 block">Boston, MA, USA</span>
+              </div>
+              <div className="p-3 rounded bg-zinc-900 border border-zinc-800">
+                <span className="text-sm font-bold text-white block">B.Tech. Mechanical Engineering</span>
+                <span className="text-xs text-netflix font-medium">VIT University</span>
+                <span className="text-[10px] text-zinc-400 block">Spec. Automotive Technology • Vellore, India</span>
+              </div>
+            </div>
+
+            <div>
+              <span className="text-zinc-400 font-bold uppercase tracking-wider text-[10px] block mb-2">Certifications</span>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="p-2 rounded bg-zinc-900 border border-zinc-800">
+                  <span className="text-netflix font-bold text-[11px]">Red Hat</span>
+                  <span className="text-zinc-200 block">OpenShift I (DO180)</span>
+                </div>
+                <div className="p-2 rounded bg-zinc-900 border border-zinc-800">
+                  <span className="text-netflix font-bold text-[11px]">Databricks</span>
+                  <span className="text-zinc-200 block">ML & Enterprise Data</span>
+                </div>
+                <div className="p-2 rounded bg-zinc-900 border border-zinc-800">
+                  <span className="text-netflix font-bold text-[11px]">LinkedIn</span>
+                  <span className="text-zinc-200 block">GenAI in Cloud</span>
+                </div>
+                <div className="p-2 rounded bg-zinc-900 border border-zinc-800">
+                  <span className="text-netflix font-bold text-[11px]">LinkedIn</span>
+                  <span className="text-zinc-200 block">LLMs & Docker</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
 
       <Footer />

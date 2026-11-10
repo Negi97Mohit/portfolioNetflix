@@ -1,41 +1,46 @@
-
 import { Link } from "react-router-dom";
 import EpisodeCard from "./EpisodeCard";
 import { ChevronRight } from "lucide-react";
-import { episodeData } from "../data/episodes";
+import { Episode } from "../data/episodes";
 
 interface EpisodesRowProps {
   title: string;
-  episodes: typeof episodeData;
+  episodes: Episode[];
   limit?: number;
 }
 
-const EpisodesRow = ({ title, episodes, limit = 4 }: EpisodesRowProps) => {
-  const displayedEpisodes = episodes.slice(0, limit);
-  
+const EpisodesRow = ({ title, episodes, limit }: EpisodesRowProps) => {
+  const displayedEpisodes = limit ? episodes.slice(0, limit) : episodes;
+
   return (
-    <div className="mb-12">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl md:text-2xl font-bold text-white">{title}</h2>
-        <Link 
-          to="/episodes" 
-          className="text-gray-400 hover:text-white transition-colors flex items-center gap-1"
+    <div className="mb-10 font-sans">
+      <div className="flex items-center justify-between mb-3.5">
+        <Link
+          to="/episodes"
+          className="group inline-flex items-center gap-1.5 text-lg sm:text-xl md:text-2xl font-bold text-white hover:text-white transition-colors"
         >
-          <span className="text-sm">See all</span>
-          <ChevronRight size={16} />
+          <span>{title}</span>
+          <span className="text-xs text-cyan-400 group-hover:text-netflix font-semibold flex items-center transition-all opacity-0 group-hover:opacity-100 group-hover:translate-x-1">
+            Explore All <ChevronRight size={14} />
+          </span>
         </Link>
       </div>
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {displayedEpisodes.map(episode => (
-          <EpisodeCard
+
+      {/* Horizontally scrollable Netflix row */}
+      <div className="flex gap-3 sm:gap-4 overflow-x-auto scrollbar-none pb-4 -mx-2 px-2">
+        {displayedEpisodes.map((episode) => (
+          <div
             key={episode.id}
-            id={episode.id}
-            title={episode.title}
-            description={episode.description}
-            duration={episode.duration}
-            thumbnail={episode.thumbnail}
-          />
+            className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[360px]"
+          >
+            <EpisodeCard
+              id={episode.id}
+              title={episode.title}
+              description={episode.description}
+              duration={episode.duration}
+              thumbnail={episode.thumbnail}
+            />
+          </div>
         ))}
       </div>
     </div>
@@ -43,4 +48,3 @@ const EpisodesRow = ({ title, episodes, limit = 4 }: EpisodesRowProps) => {
 };
 
 export default EpisodesRow;
-
